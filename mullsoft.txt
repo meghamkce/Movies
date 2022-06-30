@@ -1,0 +1,77 @@
+Connect to SQLite database:
+
+import java.sql.Connection;  
+import java.sql.DriverManager;  
+import java.sql.SQLException;  
+   
+public class Connect {  
+     /** 
+     * Connect to a sample database 
+     */  
+    public static void connect() {  
+        Connection conn = null;  
+        try {  
+            // db parameters  
+            String url = "jdbc:sqlite:C:/sqlite/JTP.db";  
+            // create a connection to the database  
+            conn = DriverManager.getConnection(url);  
+              
+            System.out.println("Connection to SQLite has been established.");  
+              
+        } catch (SQLException e) {  
+            System.out.println(e.getMessage());  
+        } finally {  
+            try {  
+                if (conn != null) {  
+                    conn.close();  
+                }  
+            } catch (SQLException ex) {  
+                System.out.println(ex.getMessage());  
+            }  
+        }  
+    }  
+ public static void main(String[] args) {  
+        connect();  
+    }  
+}  
+
+Create Database using java:
+
+import java.sql.Connection;  
+import java.sql.DatabaseMetaData;  
+import java.sql.DriverManager;  
+import java.sql.SQLException;  
+   
+public class Create {  
+  
+    public static void createNewDatabase(String fileName) {  
+   
+        String url = "jdbc:sqlite:C:/sqlite/" + fileName;  
+   
+        try {  
+            Connection conn = DriverManager.getConnection(url);  
+            if (conn != null) {  
+                DatabaseMetaData meta = conn.getMetaData();  
+                System.out.println("The driver name is " + meta.getDriverName());  
+                System.out.println("A new database has been created.");  
+            }  
+   
+        } catch (SQLException e) {  
+            System.out.println(e.getMessage());  
+        }  
+    }  
+  
+    public static void main(String[] args) {  
+        createNewDatabase("SSSIT.db");  
+    }  
+}  
+
+movie.db;
+CREATE TABLE movie(movie_name text,actor text,actoress text,director text,year_of_release integer NOT NULL);
+INSERT INTO movie(movie_name,actor,actoress ,director ,year_of_release) VALUES('Don','Sivakarthikeyen','Priyanka','Chakravathi',2022);
+INSERT INTO movie(movie_name,actor,actoress ,director ,year_of_release) VALUES('Visvasam','Ajith','Nayanthara','Shiva',2019);
+INSERT INTO movie(movie_name,actor,actoress ,director ,year_of_release) VALUES('Singam','Surya','Anushka','Ahiva',2011);
+INSERT INTO movie(movie_name,actor,actoress ,director ,year_of_release) VALUES('Soorarai potru','Surya','Aparna','Sudha Kongara',2019);
+//for query
+SELECT * FROM movies;
+SELECT movie FROM movies WHERE actor='ajith';
